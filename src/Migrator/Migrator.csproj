@@ -94,6 +94,7 @@
   <ItemGroup>
     <None Include="..\..\default.build">
       <Link>default.build</Link>
+      <SubType>Designer</SubType>
     </None>
     <None Include="MigratorDotNet.snk" />
   </ItemGroup>

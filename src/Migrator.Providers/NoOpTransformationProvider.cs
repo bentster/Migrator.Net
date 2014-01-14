@@ -24,7 +24,7 @@ namespace Migrator.Providers
             set { }
         }
 
-        public int? Timeout { get; set; }
+        public int Timeout { get; set; }
 
         public Dialect Dialect
         {

@@ -53,7 +53,7 @@ namespace Migrator.Providers
             set { _logger = value; }
         }
 
-        public int? Timeout { get; set; }
+        public int Timeout { get; set; }
 
         public Dialect Dialect
         {
@@ -567,7 +567,7 @@ namespace Migrator.Providers
             IDbCommand cmd = _connection.CreateCommand();
             cmd.CommandText = sql;
             cmd.CommandType = CommandType.Text;
-            cmd.CommandTimeout = Timeout ?? 30;
+            cmd.CommandTimeout = Timeout;
             if (_transaction != null)
             {
                 cmd.Transaction = _transaction;

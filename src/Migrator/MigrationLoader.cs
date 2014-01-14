@@ -111,12 +111,12 @@ namespace Migrator
             return attrib.Version;
         }
 
-        public static int? GetMigrationTimeout(Type t)
+        public static int GetMigrationTimeout(Type t)
         {
             MigrationAttribute attrib = (MigrationAttribute)
                                         Attribute.GetCustomAttribute(t, typeof(MigrationAttribute));
 
-            return attrib.Timeout;
+            return attrib.Timeout == 0 ? 30 : attrib.Timeout;
         }
 
         public List<long> GetAvailableMigrations()
