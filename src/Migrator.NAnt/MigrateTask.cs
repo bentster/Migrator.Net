@@ -1,4 +1,5 @@
-#region License
+﻿#region License
+
 //The contents of this file are subject to the Mozilla Public License
 //Version 1.1 (the "License"); you may not use this file except in
 //compliance with the License. You may obtain a copy of the License at
@@ -7,6 +8,7 @@
 //basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
 //License for the specific language governing rights and limitations
 //under the License.
+
 #endregion
 
 using System;
@@ -20,11 +22,11 @@ using Migrator.NAnt.Loggers;
 
 namespace Migrator.NAnt
 {
-	/// <summary>
-	/// Runs migrations on a database
-	/// </summary>
-	/// <example>
-	/// <loadtasks assembly="…/Migrator.NAnt.dll" />
+    /// <summary>
+    /// Runs migrations on a database
+    /// </summary>
+    /// <example>
+    /// <loadtasks assembly="…/Migrator.NAnt.dll" />
     /// <target name="migrate" description="Migrate the database" depends="build">
     ///  <property name="version" value="-1" overwrite="false" />
     ///  <migrate
@@ -33,41 +35,41 @@ namespace Migrator.NAnt
     ///    migrations="bin/MyProject.dll"
     ///    to="${version}" />
     /// </target>
-	/// </example>
-	[TaskName("migrate")]
-	public class MigrateTask : Task
-	{
-		private long _to = -1; // To last revision
-		private string _provider;
-		private string _connectionString;
-		private FileInfo _migrationsAssembly;
-		private bool _trace;
-		private bool _dryrun;
+    /// </example>
+    [TaskName("migrate")]
+    public class MigrateTask : Task
+    {
+        private long _to = -1; // To last revision
+        private string _provider;
+        private string _connectionString;
+        private FileInfo _migrationsAssembly;
+        private bool _trace;
+        private bool _dryrun;
         private string _scriptFile;
 
         private string _directory;
         private string _language;
 
-		[TaskAttribute("provider", Required=true)]
-		public string Provider
-		{
-			set { _provider = value; }
-			get { return _provider; }
-		}
-		
-		[TaskAttribute("connectionstring", Required=true)]
-		public string ConnectionString
-		{
-			set { _connectionString = value; }
-			get { return _connectionString; }
-		}
-		
-		[TaskAttribute("migrations")]
-		public FileInfo MigrationsAssembly
-		{
-			set { _migrationsAssembly = value; }
-			get { return _migrationsAssembly; }
-		}
+        [TaskAttribute("provider", Required = true)]
+        public string Provider
+        {
+            set { _provider = value; }
+            get { return _provider; }
+        }
+
+        [TaskAttribute("connectionstring", Required = true)]
+        public string ConnectionString
+        {
+            set { _connectionString = value; }
+            get { return _connectionString; }
+        }
+
+        [TaskAttribute("migrations")]
+        public FileInfo MigrationsAssembly
+        {
+            set { _migrationsAssembly = value; }
+            get { return _migrationsAssembly; }
+        }
 
         /// <summary>
         /// The paths to the directory that contains your migrations. 
@@ -87,27 +89,27 @@ namespace Migrator.NAnt
             get { return _language; }
         }
 
-		
-		[TaskAttribute("to")]
-		public long To
-		{
-			set { _to = value; }
-			get { return _to; }
-		}
-		
-		[TaskAttribute("trace")]
-		public bool Trace
-		{
-			set { _trace = value; }
-			get { return _trace; }
-		}
-		
-		[TaskAttribute("dryrun")]
-		public bool DryRun
-		{
-			set { _dryrun = value; }
-			get { return _dryrun; }
-		}
+
+        [TaskAttribute("to")]
+        public long To
+        {
+            set { _to = value; }
+            get { return _to; }
+        }
+
+        [TaskAttribute("trace")]
+        public bool Trace
+        {
+            set { _trace = value; }
+            get { return _trace; }
+        }
+
+        [TaskAttribute("dryrun")]
+        public bool DryRun
+        {
+            set { _dryrun = value; }
+            get { return _dryrun; }
+        }
 
         /// <summary>
         /// Gets value indicating whether to script the changes made to the database 
@@ -129,9 +131,9 @@ namespace Migrator.NAnt
             get { return _scriptFile; }
             set { _scriptFile = value; }
         }
-		
-		protected override void ExecuteTask()
-		{
+
+        protected override void ExecuteTask()
+        {
             if (! String.IsNullOrEmpty(Directory))
             {
                 ScriptEngine engine = new ScriptEngine(Language, null);
@@ -143,7 +145,7 @@ namespace Migrator.NAnt
                 Assembly asm = Assembly.LoadFrom(MigrationsAssembly.FullName);
                 Execute(asm);
             }
-		}
+        }
 
         private void Execute(Assembly asm)
         {
@@ -173,5 +175,5 @@ namespace Migrator.NAnt
             else
                 mig.MigrateTo(_to);
         }
-	}
+    }
 }

@@ -5,10 +5,11 @@ namespace Migrator.Tests.Data
     [Migration(1)]
     public class FirstTestMigration : Migration
     {
-        override public void Up()
+        public override void Up()
         {
         }
-        override public void Down()
+
+        public override void Down()
         {
         }
     }
@@ -26,7 +27,9 @@ namespace Migrator.Tests.Data
         /// <summary>
         /// Defines tranformations to port the database to the current version.
         /// </summary>
-        public void Up() {}
+        public void Up()
+        {
+        }
 
         /// <summary>
         /// This is run after the Up transaction has been committed
@@ -38,7 +41,9 @@ namespace Migrator.Tests.Data
         /// <summary>
         /// Defines transformations to revert things done in <c>Up</c>.
         /// </summary>
-        public void Down() {}
+        public void Down()
+        {
+        }
 
         /// <summary>
         /// This is run after the Down transaction has been committed

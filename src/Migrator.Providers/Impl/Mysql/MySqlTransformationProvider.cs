@@ -27,8 +27,8 @@ namespace Migrator.Providers.Mysql
                 ExecuteNonQuery(String.Format("ALTER TABLE {0} DROP KEY {1}", table, _dialect.Quote(name)));
             }
         }
-        
-        public override void RemoveConstraint(string table, string name) 
+
+        public override void RemoveConstraint(string table, string name)
         {
             if (ConstraintExists(table, name))
             {
@@ -38,8 +38,8 @@ namespace Migrator.Providers.Mysql
 
         public override bool ConstraintExists(string table, string name)
         {
-            if (!TableExists(table)) 
-            return false;
+            if (!TableExists(table))
+                return false;
 
             string sqlConstraint = string.Format("SHOW KEYS FROM {0}", table);
 
@@ -56,7 +56,7 @@ namespace Migrator.Providers.Mysql
 
             return false;
         }
-        
+
         public override bool PrimaryKeyExists(string table, string name)
         {
             return ConstraintExists(table, "PRIMARY");
@@ -114,18 +114,18 @@ namespace Migrator.Providers.Mysql
             string sqlCreate = string.Format("CREATE TABLE {0} ({1}) ENGINE = {2}", name, columns, engine);
             ExecuteNonQuery(sqlCreate);
         }
-        
+
         public override void RenameColumn(string tableName, string oldColumnName, string newColumnName)
         {
             if (ColumnExists(tableName, newColumnName))
                 throw new MigrationException(String.Format("Table '{0}' has column named '{0}' already", tableName, newColumnName));
-                
-            if (ColumnExists(tableName, oldColumnName)) 
+
+            if (ColumnExists(tableName, oldColumnName))
             {
                 string definition = null;
-                using (IDataReader reader = ExecuteQuery(String.Format("SHOW COLUMNS FROM {0} WHERE Field='{1}'", tableName, oldColumnName))) 
+                using (IDataReader reader = ExecuteQuery(String.Format("SHOW COLUMNS FROM {0} WHERE Field='{1}'", tableName, oldColumnName)))
                 {
-                    if (reader.Read()) 
+                    if (reader.Read())
                     {
                         // TODO: Could use something similar to construct the columns in GetColumns
                         definition = reader["Type"].ToString();
@@ -133,7 +133,7 @@ namespace Migrator.Providers.Mysql
                         {
                             definition += " " + "NOT NULL";
                         }
-                        
+
                         if (!reader.IsDBNull(reader.GetOrdinal("Key")))
                         {
                             string key = reader["Key"].ToString();
@@ -146,15 +146,15 @@ namespace Migrator.Providers.Mysql
                                 definition += " " + "UNIQUE";
                             }
                         }
-                        
+
                         if (!reader.IsDBNull(reader.GetOrdinal("Extra")))
                         {
                             definition += " " + reader["Extra"].ToString();
                         }
                     }
                 }
-                
-                if (!String.IsNullOrEmpty(definition)) 
+
+                if (!String.IsNullOrEmpty(definition))
                 {
                     ExecuteNonQuery(String.Format("ALTER TABLE {0} CHANGE {1} {2} {3}", tableName, oldColumnName, newColumnName, definition));
                 }

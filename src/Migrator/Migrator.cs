@@ -88,7 +88,7 @@ namespace Migrator
         /// <summary>
         /// Returns the current migrations applied to the database.
         /// </summary>
-        public List<long> AppliedMigrations 
+        public List<long> AppliedMigrations
         {
             get { return _provider.AppliedMigrations; }
         }
@@ -125,7 +125,6 @@ namespace Migrator
         /// <param name="version">The version that must became the current one</param>
         public void MigrateTo(long version)
         {
-
             if (_migrationLoader.MigrationsTypes.Count == 0)
             {
                 _logger.Warn("No public classes with the Migration attribute were found.");

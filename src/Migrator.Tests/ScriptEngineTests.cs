@@ -9,7 +9,7 @@ namespace Migrator.Tests
     public class ScriptEngineTests
     {
         [Test]
-        public void CanCompileAssemblies() 
+        public void CanCompileAssemblies()
         {
             ScriptEngine engine = new ScriptEngine();
 

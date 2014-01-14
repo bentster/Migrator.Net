@@ -17,7 +17,7 @@ namespace Migrator.Providers.Oracle
         }
 
         public override void AddForeignKey(string name, string primaryTable, string[] primaryColumns, string refTable,
-                                          string[] refColumns, Migrator.Framework.ForeignKeyConstraint constraint)
+                                           string[] refColumns, Migrator.Framework.ForeignKeyConstraint constraint)
         {
             if (ConstraintExists(primaryTable, name))
             {

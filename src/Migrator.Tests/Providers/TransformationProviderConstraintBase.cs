@@ -9,7 +9,6 @@ namespace Migrator.Tests.Providers
     /// </summary>
     public class TransformationProviderConstraintBase : TransformationProviderBase
     {
-
         public void AddForeignKey()
         {
             AddTableWithPrimaryKey();
@@ -148,7 +147,7 @@ namespace Migrator.Tests.Providers
             Assert.IsTrue(_provider.TableExists("Test"), "Table doesn't exist");
             Assert.IsTrue(_provider.PrimaryKeyExists("Test", "PK_Test"), "Constraint doesn't exist");
 
-        	Column column = _provider.GetColumnByName("Test", "Name");
+            Column column = _provider.GetColumnByName("Test", "Name");
             Assert.IsNotNull(column);
             Assert.IsTrue((column.ColumnProperty & ColumnProperty.Null) == ColumnProperty.Null);
         }

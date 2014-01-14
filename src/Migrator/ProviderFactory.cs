@@ -26,16 +26,16 @@ namespace Migrator
     {
         private static readonly Assembly providerAssembly;
         private static readonly Dictionary<String, object> dialects = new Dictionary<string, object>();
+
         static ProviderFactory()
         {
-            
             //string directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
             //string fullPath = Path.Combine(directory, "Migrator.Providers.dll");
             //if (fullPath.StartsWith("file:\\"))
             //    fullPath = fullPath.Substring(6);
             //else if (fullPath.StartsWith("file:"))
             //    fullPath = fullPath.Substring(5);
-            providerAssembly = Assembly.GetAssembly(typeof(TransformationProvider));
+            providerAssembly = Assembly.GetAssembly(typeof (TransformationProvider));
             //providerAssembly = Assembly.LoadFrom("Migrator.Providers.dll");
             LoadDialects();
         }
@@ -44,7 +44,7 @@ namespace Migrator
         {
             object dialectInstance = DialectForProvider(providerName);
             MethodInfo mi = dialectInstance.GetType().GetMethod("NewProviderForDialect", new Type[] {typeof (String)});
-            return (ITransformationProvider)mi.Invoke(dialectInstance, new object[] { connectionString });
+            return (ITransformationProvider) mi.Invoke(dialectInstance, new object[] {connectionString});
         }
 
         public static object DialectForProvider(string providerName)

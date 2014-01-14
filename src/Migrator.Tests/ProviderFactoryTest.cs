@@ -8,11 +8,10 @@ namespace Migrator.Tests
     [TestFixture]
     public class ProviderFactoryTest
     {
-
         [Test]
         public void CanGetDialectsForProvider()
         {
-            string[] providers = new string[] { "SqlServer", "Mysql", "SQLite", "PostgreSQL", "SqlServer2005", "SqlServerCe", "Oracle" };
+            string[] providers = new string[] {"SqlServer", "Mysql", "SQLite", "PostgreSQL", "SqlServer2005", "SqlServerCe", "Oracle"};
             Array.ForEach(providers,
                           delegate(string provider) { Assert.IsNotNull(ProviderFactory.DialectForProvider(provider)); });
             Assert.IsNull(ProviderFactory.DialectForProvider(null));

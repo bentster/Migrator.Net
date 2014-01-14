@@ -11,7 +11,6 @@ namespace Migrator.Tests
     [TestFixture]
     public class ColumnPropertyMapperTest
     {
-
         [Test]
         public void OracleCreatesSql()
         {

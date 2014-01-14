@@ -107,7 +107,7 @@ namespace Migrator.Compile
             }
             return parms;
         }
-        
+
         private static string FrameworkAssemblyPath()
         {
             string path = typeof (MigrationAttribute).Module.FullyQualifiedName;

@@ -1,4 +1,5 @@
 #region License
+
 //The contents of this file are subject to the Mozilla Public License
 //Version 1.1 (the "License"); you may not use this file except in
 //compliance with the License. You may obtain a copy of the License at
@@ -7,13 +8,14 @@
 //basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
 //License for the specific language governing rights and limitations
 //under the License.
+
 #endregion
 
 using System;
 using System.Collections.Generic;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using ILogger=Migrator.Framework.ILogger;
+using ILogger = Migrator.Framework.ILogger;
 
 namespace Migrator.MSBuild.Logger
 {
@@ -44,20 +46,20 @@ namespace Migrator.MSBuild.Logger
             LogInfo("Current version : {0}", currentVersion);
         }
 
-		public void Started(List<long> currentVersions, long finalVersion)
-		{
-			LogInfo("Latest version applied : {0}.  Target version : {1}", LatestVersion(currentVersions), finalVersion);
-		}
+        public void Started(List<long> currentVersions, long finalVersion)
+        {
+            LogInfo("Latest version applied : {0}.  Target version : {1}", LatestVersion(currentVersions), finalVersion);
+        }
 
-		public void MigrateUp(long version, string migrationName)
-		{
-			LogInfo("Applying {0}: {1}", version.ToString(), migrationName);
-		}
+        public void MigrateUp(long version, string migrationName)
+        {
+            LogInfo("Applying {0}: {1}", version.ToString(), migrationName);
+        }
 
-		public void MigrateDown(long version, string migrationName)
-		{
-			LogInfo("Removing {0}: {1}", version.ToString(), migrationName);
-		}
+        public void MigrateDown(long version, string migrationName)
+        {
+            LogInfo("Removing {0}: {1}", version.ToString(), migrationName);
+        }
 
         public void Skipping(long version)
         {
@@ -114,14 +116,14 @@ namespace Migrator.MSBuild.Logger
         {
             _task.Log.LogMessage(MessageImportance.Low, format, args);
         }
-		
-		private string LatestVersion(List<long> versions)
+
+        private string LatestVersion(List<long> versions)
         {
-			if(versions.Count > 0)
-			{
-				return versions[versions.Count - 1].ToString();
-			}
-			return "No migrations applied yet!";
-		}
+            if (versions.Count > 0)
+            {
+                return versions[versions.Count - 1].ToString();
+            }
+            return "No migrations applied yet!";
+        }
     }
 }

@@ -5,7 +5,7 @@ namespace Migrator.Providers.SqlServer
 {
     public class SqlServer2005Dialect : SqlServerDialect
     {
-        public SqlServer2005Dialect() :base()
+        public SqlServer2005Dialect() : base()
         {
             RegisterColumnType(DbType.AnsiString, 2147483647, "VARCHAR(MAX)");
             RegisterColumnType(DbType.Binary, 2147483647, "VARBINARY(MAX)");
@@ -13,7 +13,9 @@ namespace Migrator.Providers.SqlServer
             RegisterColumnType(DbType.Xml, "XML");
         }
 
-        public override Type TransformationProvider { get { return typeof (SqlServerTransformationProvider); } }
-
+        public override Type TransformationProvider
+        {
+            get { return typeof (SqlServerTransformationProvider); }
+        }
     }
 }

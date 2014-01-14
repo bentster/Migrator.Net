@@ -7,9 +7,8 @@ using NUnit.Mocks;
 namespace Migrator.Tests
 {
     [TestFixture]
-    public class MigrationLoaderTest 
+    public class MigrationLoaderTest
     {
-
         private MigrationLoader _migrationLoader;
 
         [SetUp]
@@ -38,16 +37,16 @@ namespace Migrator.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(DuplicatedVersionException))]
+        [ExpectedException(typeof (DuplicatedVersionException))]
         public void CheckForDuplicatedVersion()
         {
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.FirstMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.FirstMigration));
             _migrationLoader.CheckForDuplicatedVersion();
         }
 
         private void SetUpCurrentVersion(int version, bool assertRollbackIsCalled)
         {
-            DynamicMock providerMock = new DynamicMock(typeof(ITransformationProvider));
+            DynamicMock providerMock = new DynamicMock(typeof (ITransformationProvider));
 
             providerMock.SetReturnValue("get_CurrentVersion", version);
             providerMock.SetReturnValue("get_Logger", new Logger(false));
@@ -56,14 +55,14 @@ namespace Migrator.Tests
             else
                 providerMock.ExpectNoCall("Rollback");
 
-            _migrationLoader = new MigrationLoader((ITransformationProvider)providerMock.MockInstance, Assembly.GetExecutingAssembly(), true);
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.FirstMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.SecondMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.ThirdMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.ForthMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.BadMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.SixthMigration));
-            _migrationLoader.MigrationsTypes.Add(typeof(MigratorTest.NonIgnoredMigration));
+            _migrationLoader = new MigrationLoader((ITransformationProvider) providerMock.MockInstance, Assembly.GetExecutingAssembly(), true);
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.FirstMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.SecondMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.ThirdMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.ForthMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.BadMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.SixthMigration));
+            _migrationLoader.MigrationsTypes.Add(typeof (MigratorTest.NonIgnoredMigration));
         }
     }
 }

@@ -14,11 +14,12 @@ namespace Migrator
         public MigrateAnywhere(List<long> availableMigrations, ITransformationProvider provider, ILogger logger)
             : base(availableMigrations, provider, logger)
         {
-			_current = 0;
-			if (provider.AppliedMigrations.Count > 0) {
-				_current = provider.AppliedMigrations[provider.AppliedMigrations.Count - 1];
-			}
-			_goForward = false;
+            _current = 0;
+            if (provider.AppliedMigrations.Count > 0)
+            {
+                _current = provider.AppliedMigrations[provider.AppliedMigrations.Count - 1];
+            }
+            _goForward = false;
         }
 
         public override long Next
@@ -61,12 +62,15 @@ namespace Migrator
         public override void Migrate(IMigration migration)
         {
             _provider.BeginTransaction();
-            MigrationAttribute attr = (MigrationAttribute)Attribute.GetCustomAttribute(migration.GetType(), typeof(MigrationAttribute));
-            
-            if (_provider.AppliedMigrations.Contains(attr.Version)) {
-            	RemoveMigration(migration, attr);
-            } else {
-            	ApplyMigration(migration, attr);
+            MigrationAttribute attr = (MigrationAttribute) Attribute.GetCustomAttribute(migration.GetType(), typeof (MigrationAttribute));
+
+            if (_provider.AppliedMigrations.Contains(attr.Version))
+            {
+                RemoveMigration(migration, attr);
+            }
+            else
+            {
+                ApplyMigration(migration, attr);
             }
         }
 
@@ -74,7 +78,7 @@ namespace Migrator
         {
             // we're adding this one
             _logger.MigrateUp(Current, migration.Name);
-            if(! DryRun)
+            if (! DryRun)
             {
                 migration.Up();
                 _provider.MigrationApplied(attr.Version);

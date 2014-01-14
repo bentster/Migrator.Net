@@ -17,7 +17,7 @@ namespace Migrator.Tests.Providers
 
             _provider = new PostgreSQLTransformationProvider(new PostgreSQLDialect(), constr);
             _provider.BeginTransaction();
-            
+
             AddDefaultTable();
         }
     }

@@ -2,23 +2,23 @@ using Migrator.Framework;
 
 namespace Migrator.Providers
 {
-	public class ForeignKeyConstraintMapper
-	{
-		public string SqlForConstraint(ForeignKeyConstraint constraint)
-		{
-			switch(constraint)
-			{
-				case ForeignKeyConstraint.Cascade:
+    public class ForeignKeyConstraintMapper
+    {
+        public string SqlForConstraint(ForeignKeyConstraint constraint)
+        {
+            switch (constraint)
+            {
+                case ForeignKeyConstraint.Cascade:
                     return "CASCADE";
-				case ForeignKeyConstraint.Restrict:
+                case ForeignKeyConstraint.Restrict:
                     return "RESTRICT";
-				case ForeignKeyConstraint.SetDefault:
+                case ForeignKeyConstraint.SetDefault:
                     return "SET DEFAULT";
-				case ForeignKeyConstraint.SetNull:
+                case ForeignKeyConstraint.SetNull:
                     return "SET NULL";
-				default:
+                default:
                     return "NO ACTION";
-			}
-		}
-	}
+            }
+        }
+    }
 }

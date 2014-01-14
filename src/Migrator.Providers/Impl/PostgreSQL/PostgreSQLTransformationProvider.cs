@@ -31,12 +31,12 @@ namespace Migrator.Providers.PostgreSQL
             _connection.ConnectionString = _connectionString;
             _connection.Open();
         }
-        
+
         public override void RemoveTable(string name)
         {
             ExecuteNonQuery(String.Format("DROP TABLE IF EXISTS {0} CASCADE", name));
         }
-        
+
         public override bool ConstraintExists(string table, string name)
         {
             using (IDataReader reader =
@@ -45,7 +45,7 @@ namespace Migrator.Providers.PostgreSQL
                 return reader.Read();
             }
         }
-        
+
         public override bool ColumnExists(string table, string column)
         {
             if (!TableExists(table))
@@ -60,14 +60,13 @@ namespace Migrator.Providers.PostgreSQL
 
         public override bool TableExists(string table)
         {
-
             using (IDataReader reader =
-                ExecuteQuery(String.Format("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name = lower('{0}')",table)))
+                ExecuteQuery(String.Format("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name = lower('{0}')", table)))
             {
                 return reader.Read();
             }
         }
-        
+
         public override void ChangeColumn(string table, Column column)
         {
             if (! ColumnExists(table, column.Name))
@@ -82,7 +81,7 @@ namespace Migrator.Providers.PostgreSQL
             ExecuteQuery(String.Format("UPDATE {0} SET {1}={2}", table, column.Name, tempColumn));
             RemoveColumn(table, tempColumn);
         }
-        
+
         public override string[] GetTables()
         {
             List<string> tables = new List<string>();
@@ -118,14 +117,11 @@ namespace Migrator.Providers.PostgreSQL
             return columns.ToArray();
         }
 
-		public override Column GetColumnByName(string table, string columnName)
-		{
-			// Duplicate because of the lower case issue
-			return Array.Find(GetColumns(table),
-				delegate(Column column)
-				{
-					return column.Name == columnName.ToLower();
-				});
-		}
+        public override Column GetColumnByName(string table, string columnName)
+        {
+            // Duplicate because of the lower case issue
+            return Array.Find(GetColumns(table),
+                              delegate(Column column) { return column.Name == columnName.ToLower(); });
+        }
     }
 }

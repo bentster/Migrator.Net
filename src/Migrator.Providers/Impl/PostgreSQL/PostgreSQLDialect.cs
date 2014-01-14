@@ -1,15 +1,14 @@
-
 using System;
 using System.Data;
 using Migrator.Framework;
 
 namespace Migrator.Providers.PostgreSQL
 {
-	public class PostgreSQLDialect : Dialect
-	{
-	    public PostgreSQLDialect()
-	    {
-	        RegisterColumnType(DbType.AnsiStringFixedLength, "char(255)");
+    public class PostgreSQLDialect : Dialect
+    {
+        public PostgreSQLDialect()
+        {
+            RegisterColumnType(DbType.AnsiStringFixedLength, "char(255)");
             RegisterColumnType(DbType.AnsiStringFixedLength, 8000, "char($l)");
             RegisterColumnType(DbType.AnsiString, "varchar(255)");
             RegisterColumnType(DbType.AnsiString, 8000, "varchar($l)");
@@ -34,22 +33,25 @@ namespace Migrator.Providers.PostgreSQL
             RegisterColumnType(DbType.String, 4000, "varchar($l)");
             RegisterColumnType(DbType.String, 1073741823, "text");
             RegisterColumnType(DbType.Time, "time");
-            
+
             RegisterProperty(ColumnProperty.Identity, "serial");
         }
 
-        public override Type TransformationProvider { get { return typeof(PostgreSQLTransformationProvider); } }
-        
+        public override Type TransformationProvider
+        {
+            get { return typeof (PostgreSQLTransformationProvider); }
+        }
+
         public override bool TableNameNeedsQuote
         {
             get { return false; }
         }
-        
+
         public override bool ConstraintNameNeedsQuote
         {
             get { return false; }
         }
-        
+
         public override bool IdentityNeedsType
         {
             get { return false; }

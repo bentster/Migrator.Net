@@ -84,10 +84,10 @@ namespace Migrator
             List<Type> migrations = new List<Type>();
             foreach (Type t in asm.GetExportedTypes())
             {
-                MigrationAttribute attrib = 
-                    (MigrationAttribute)  Attribute.GetCustomAttribute(t, typeof (MigrationAttribute));
+                MigrationAttribute attrib =
+                    (MigrationAttribute) Attribute.GetCustomAttribute(t, typeof (MigrationAttribute));
 
-                if (attrib != null && typeof(IMigration).IsAssignableFrom(t) && !attrib.Ignore)
+                if (attrib != null && typeof (IMigration).IsAssignableFrom(t) && !attrib.Ignore)
                 {
                     migrations.Add(t);
                 }
@@ -106,25 +106,25 @@ namespace Migrator
         public static long GetMigrationVersion(Type t)
         {
             MigrationAttribute attrib = (MigrationAttribute)
-                                        Attribute.GetCustomAttribute(t, typeof(MigrationAttribute));
+                                        Attribute.GetCustomAttribute(t, typeof (MigrationAttribute));
 
             return attrib.Version;
         }
 
         public List<long> GetAvailableMigrations()
         {
-        	//List<int> availableMigrations = new List<int>();
+            //List<int> availableMigrations = new List<int>();
             _migrationsTypes.Sort(new MigrationTypeComparer(true));
             return _migrationsTypes.ConvertAll(new Converter<Type, long>(GetMigrationVersion));
         }
-        
+
         public IMigration GetMigration(long version)
         {
             foreach (Type t in _migrationsTypes)
             {
                 if (GetMigrationVersion(t) == version)
                 {
-                    IMigration migration = (IMigration)Activator.CreateInstance(t);
+                    IMigration migration = (IMigration) Activator.CreateInstance(t);
                     migration.Database = _provider;
                     return migration;
                 }

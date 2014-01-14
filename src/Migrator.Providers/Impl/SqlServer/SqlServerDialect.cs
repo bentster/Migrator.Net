@@ -1,15 +1,14 @@
-
 using System;
 using System.Data;
 using Migrator.Framework;
 
 namespace Migrator.Providers.SqlServer
 {
-	public class SqlServerDialect : Dialect
-	{
-	    public SqlServerDialect()
-	    {
-	        RegisterColumnType(DbType.AnsiStringFixedLength, "CHAR(255)");
+    public class SqlServerDialect : Dialect
+    {
+        public SqlServerDialect()
+        {
+            RegisterColumnType(DbType.AnsiStringFixedLength, "CHAR(255)");
             RegisterColumnType(DbType.AnsiStringFixedLength, 8000, "CHAR($l)");
             RegisterColumnType(DbType.AnsiString, "VARCHAR(255)");
             RegisterColumnType(DbType.AnsiString, 8000, "VARCHAR($l)");
@@ -36,11 +35,14 @@ namespace Migrator.Providers.SqlServer
             RegisterColumnType(DbType.String, 4000, "NVARCHAR($l)");
             RegisterColumnType(DbType.String, 1073741823, "NTEXT");
             RegisterColumnType(DbType.Time, "DATETIME");
-             
-	        RegisterProperty(ColumnProperty.Identity, "IDENTITY");
+
+            RegisterProperty(ColumnProperty.Identity, "IDENTITY");
         }
 
-        public override Type TransformationProvider { get { return typeof(SqlServerTransformationProvider); } }
+        public override Type TransformationProvider
+        {
+            get { return typeof (SqlServerTransformationProvider); }
+        }
 
         public override bool SupportsIndex
         {
