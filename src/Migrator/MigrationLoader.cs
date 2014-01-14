@@ -111,6 +111,14 @@ namespace Migrator
             return attrib.Version;
         }
 
+        public static int? GetMigrationTimeout(Type t)
+        {
+            MigrationAttribute attrib = (MigrationAttribute)
+                                        Attribute.GetCustomAttribute(t, typeof(MigrationAttribute));
+
+            return attrib.Timeout;
+        }
+
         public List<long> GetAvailableMigrations()
         {
             //List<int> availableMigrations = new List<int>();
@@ -124,7 +132,8 @@ namespace Migrator
             {
                 if (GetMigrationVersion(t) == version)
                 {
-                    IMigration migration = (IMigration) Activator.CreateInstance(t);
+                    var migration = (IMigration) Activator.CreateInstance(t);
+                    _provider.Timeout = GetMigrationTimeout(t);
                     migration.Database = _provider;
                     return migration;
                 }

@@ -16,11 +16,15 @@ namespace Migrator.Providers
         {
         }
 
+
+
         public virtual ILogger Logger
         {
             get { return null; }
             set { }
         }
+
+        public int? Timeout { get; set; }
 
         public Dialect Dialect
         {

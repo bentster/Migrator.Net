@@ -23,13 +23,26 @@ namespace Migrator.Framework
         private long _version;
         private bool _ignore = false;
 
+
         /// <summary>
         /// Describe the migration
         /// </summary>
-        /// <param name="version">The unique version of the migration.</param>	
+        /// <param name="version">The unique version of the migration.</param>
+        /// <param name="timeout"></param>	
         public MigrationAttribute(long version)
         {
             Version = version;
+        }
+
+        /// <summary>
+        /// Describe the migration
+        /// </summary>
+        /// <param name="version">The unique version of the migration.</param>
+        /// <param name="timeout"></param>	
+        public MigrationAttribute(long version, int? timeout)
+        {
+            Version = version;
+            Timeout = timeout;
         }
 
         /// <summary>
@@ -40,6 +53,8 @@ namespace Migrator.Framework
             get { return _version; }
             private set { _version = value; }
         }
+
+        public int? Timeout { get; set; }
 
         /// <summary>
         /// Set to <c>true</c> to ignore this migration.

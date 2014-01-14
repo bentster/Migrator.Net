@@ -20,6 +20,7 @@ namespace Migrator.Framework
         List<long> AppliedMigrations { get; }
 
         ILogger Logger { get; set; }
+        int? Timeout { get; set; }
 
         /// <summary>
         /// Add a column to an existing table
