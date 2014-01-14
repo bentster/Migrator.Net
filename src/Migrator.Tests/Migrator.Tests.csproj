@@ -15,6 +15,8 @@
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,10 +29,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -94,17 +94,17 @@
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Migrator\Migrator-vs2008.csproj">
+    <ProjectReference Include="..\Migrator\Migrator.csproj">
       <Project>{1FEE70A4-AAD7-4C60-BE60-3F7DC03A8C4D}</Project>
-      <Name>Migrator-vs2008</Name>
+      <Name>Migrator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Migrator.Framework\Migrator.Framework-vs2008.csproj">
+    <ProjectReference Include="..\Migrator.Framework\Migrator.Framework.csproj">
       <Project>{5270F048-E580-486C-B14C-E5B9F6E539D4}</Project>
-      <Name>Migrator.Framework-vs2008</Name>
+      <Name>Migrator.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Migrator.Providers\Migrator.Providers-vs2008.csproj">
+    <ProjectReference Include="..\Migrator.Providers\Migrator.Providers.csproj">
       <Project>{D58C68E4-D789-40F7-9078-C9F587D4363C}</Project>
-      <Name>Migrator.Providers-vs2008</Name>
+      <Name>Migrator.Providers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -115,7 +115,7 @@
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
-      <ProductName>.NET Framework Client Profile</ProductName>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
